@@ -188,7 +188,7 @@ class ImageMenuApp:
                 else:
                     result.append(f"{qty}x {img_name}")
 
-        pack_count = self.pack_count_entry.get() or "0"
+        pack_count = self.pack_count_entry.get() or "1"
         result_text = f"[{self.total_quantity}/5] [{pack_count}p] " + ", ".join(result)
         pyperclip.copy(result_text)
 
