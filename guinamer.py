@@ -2,6 +2,13 @@ import tkinter as tk
 from tkinter import messagebox
 import pyperclip
 from PIL import Image, ImageTk
+import sys
+import os
+
+# for exe
+def resource_path(relative_path):
+        base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+        return os.path.join(base_path, relative_path)
 
 
 pack_list = ["A1 Charizard", "A1 Mewtwo", "A1 Pikachu", "A1A"]
@@ -11,6 +18,7 @@ pack_card_list = {
     "A1 Pikachu": ["FA Arcanine", "FA Blastoise", "FA Pikachu", "FA Zapdos", "FA Wigglytuff", "FA Misty", "FA Brock", "FA Lt. Surge", "RR Zapdos", "RR Wigglytuff"],
     "A1A": ["FA Celebi", "FA Gyarados", "FA Mew", "FA Aerodactyl", "FA Pidgeot", "FA Budding Expeditioner", "FA Blue", "FA Leaf", "RR Mew", "RR Aerodactyl"]
 }
+
 
 class ImageMenuApp:
     def __init__(self, root):
@@ -23,13 +31,13 @@ class ImageMenuApp:
         self.selected_quantities = {}
         self.total_quantity = 0
 
-        self.pack_images = {name: tk.PhotoImage(file=f"./images/{name}.png") for name in pack_list}
+        self.pack_images = {name: tk.PhotoImage(file=resource_path(f"./images/{name}.png")) for name in pack_list}
         '''self.card_images = {
             key: {img: tk.PhotoImage(file=f"./images/{img}.png") for img in pack_card_list[key]} 
             for key in pack_card_list
         }'''
         self.card_images = {
-            key: {img: Image.open("./images/"+img+".png") for img in pack_card_list[key]} 
+            key: {img: Image.open(resource_path("./images/"+img+".png")) for img in pack_card_list[key]} 
             for key in pack_card_list
         }
 
